@@ -9,3 +9,11 @@ body {
 .jumbotron {
   width: 60%;
 }
+.option {
+  width: 50%;
+  margin: auto;
+}
+.option:hover {
+  background-color: #000;
+  color: #fff;
+}
