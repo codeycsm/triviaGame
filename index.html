@@ -11,6 +11,12 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Trivia Game</title>
   </head>
@@ -49,10 +55,12 @@
         <div class="col text-center">
           <div class="jumbotron mx-auto my-auto">
             <h1>Space Trivia!</h1>
-            <p>Time remaining: <span id="timer"></span> seconds left.</p>
-            <p id="question"></p>
-            <p id="options"></p>
-            <p id="answer"></p>
+            <div id="questionsContainer">
+              <p>Time remaining: <span id="timer"></span> seconds left.</p>
+              <p id="question"></p>
+              <p id="options"></p>
+              <p id="answer" class="mb-0 pb-2"></p>
+            </div>
             <div class="text-center">
               <button id="startTrivia" class="btn btn-success">Start</button>
             </div>

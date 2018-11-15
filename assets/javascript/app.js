@@ -15,13 +15,48 @@ let questions = [
   },
   {
     question: "How many planets in our solar system have rings?",
-    options: [5, 1, 4, 7],
+    options: [5, 1, 7, 4],
     answer: 4
   },
   {
-    question: "Which planet is a dwarf planet?",
-    options: ["Venus", "Uranus", "Mars", "Pluto"],
+    question: "Which object use to be a planet but now is a dwarf planet?",
+    options: ["Pluto", "Venus", "Uranus", "Mars"],
     answer: "Pluto"
+  },
+  {
+    question: "What is the name of the galaxy our solar system lives?",
+    options: ["Andromeda", "Tadpole", "Whirlwind", "Milky Way"],
+    answer: "Milky Way"
+  },
+  {
+    question: "Which man satellite has travled the farthest?",
+    options: ["Aura", "Voyager 1", "CALIPSO", "PARASOL"],
+    answer: "Voyager 1"
+  },
+  {
+    question: "Which planet is considered Earth's sister planet?",
+    options: ["Mars", "Neptune", "Venus", "Saturn"],
+    answer: "Venus"
+  },
+  {
+    question: "The _____ ______ lies between Mars and Jupiter?",
+    options: ["Ceres", "Ort Cloud", "Astroid Belt", "Halley's Comet"],
+    answer: "Astroid Belt"
+  },
+  {
+    question: "How ofter does Halley's Comet appear?",
+    options: [
+      "About 75 years",
+      "About 70 years",
+      "About 45 years",
+      "About 100 years"
+    ],
+    answer: "About 75 years"
+  },
+  {
+    question: "Which planet is farthest from the sun?",
+    options: ["Neptune", "Jupiter", "Saturn", "Pluto"],
+    answer: "Neptune"
   }
 ];
 
@@ -33,7 +68,7 @@ let timer = null;
 
 // "Start" button click to begin trivia.
 function startTrivia() {
-  clearInterval(timer);
+  $("#timer").html(guessTime);
   $("#startTrivia").on("click", function() {
     $("#startTrivia").css("display", "none");
     displayQuestion();
@@ -41,7 +76,6 @@ function startTrivia() {
 }
 // Displays the questions and answers to chose from
 function displayQuestion() {
-  clearInterval(timer);
   $("#question,#answer,#options").empty();
   $("#question").html(questions[questionsIndex].question);
   for (let i = 0; i < questions[questionsIndex].options.length; i++) {
@@ -53,6 +87,7 @@ function displayQuestion() {
 }
 // timer for each question
 function startTimer() {
+  clearInterval(timer);
   timer = setInterval(function() {
     $("#timer").html(guessTime);
     if (guessTime === 0) {
@@ -67,21 +102,27 @@ function startTimer() {
   $(".option").on("click", function() {
     clearInterval(timer);
     guessTime = 10;
+    $(".option").unbind();
+    $("#question, #options").empty("slow");
     checkGuess(this);
   });
 }
 // Checks if the answer the user clicked is the correct answer
 function checkGuess(guess) {
-  clearInterval(timer);
+  let correct = "<i class='fas fa-check' id='right'></i>";
+  let incorrect = "<i class='fas fa-times' id='wrong'></i>";
   if ($(guess).html() == questions[questionsIndex].answer) {
     correctGuesses++;
     $("#answer").html(
-      "You guessed " + questions[questionsIndex].answer + " correctly"
+      correct +
+        " You guessed " +
+        questions[questionsIndex].answer +
+        " correctly."
     );
   } else {
     incorrectGuesses++;
     $("#answer").html(
-      "The correct answer is: " + questions[questionsIndex].answer
+      incorrect + " The correct answer is: " + questions[questionsIndex].answer
     );
   }
   setTimeout(function() {
@@ -90,12 +131,11 @@ function checkGuess(guess) {
 }
 // check if player finished the trivia game
 function triviaOver() {
-  clearInterval(timer);
   if (questionsIndex === questions.length - 1) {
     $("#question").html("Answered correctly: " + correctGuesses);
     $("#options").html("Answered incorrectly: " + incorrectGuesses);
     $("#answer").html(
-      "Score: " + (correctGuesses / questions.length) * 100 + "%"
+      "Score: " + Math.round((correctGuesses / questions.length) * 100) + "%"
     );
     setTimeout(function() {
       reset();
@@ -109,12 +149,10 @@ function triviaOver() {
 }
 // reset trivia game
 function reset() {
-  clearInterval(timer);
   guessTime = 10;
   questionsIndex = 0;
   correctGuesses = 0;
   incorrectGuesses = 0;
-  $("#timer").html(guessTime);
   $("#question,#options,#answer").empty();
   $("#startTrivia").css("display", "inline-block");
   startTrivia();

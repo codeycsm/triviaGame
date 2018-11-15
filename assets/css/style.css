@@ -4,7 +4,7 @@ body {
   width: 100%;
 }
 .col {
-  margin: 3em 0px 0px 0px;
+  margin: 1.5em 0px 0px 0px;
 }
 .jumbotron {
   width: 60%;
@@ -12,8 +12,18 @@ body {
 .option {
   width: 50%;
   margin: auto;
+  opacity: 1;
 }
 .option:hover {
-  background-color: #000;
-  color: #fff;
+  font-size: 2em;
+}
+#right {
+  color: green;
+}
+#wrong {
+  color: red;
+}
+.fade {
+  transition: opacity 1s;
+  opacity: 0;
 }
