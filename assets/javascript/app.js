@@ -19,7 +19,7 @@ let questions = [
     answer: 4
   },
   {
-    question: "Which object use to be a planet but now is a dwarf planet?",
+    question: "Which object use to be a planet but is now a dwarf planet?",
     options: ["Pluto", "Venus", "Uranus", "Mars"],
     answer: "Pluto"
   },
@@ -29,7 +29,7 @@ let questions = [
     answer: "Milky Way"
   },
   {
-    question: "Which man satellite has travled the farthest?",
+    question: "Which man made satellite has travled the farthest?",
     options: ["Aura", "Voyager 1", "CALIPSO", "PARASOL"],
     answer: "Voyager 1"
   },
@@ -44,7 +44,7 @@ let questions = [
     answer: "Astroid Belt"
   },
   {
-    question: "How ofter does Halley's Comet appear?",
+    question: "How often does Halley's Comet appear?",
     options: [
       "About 75 years",
       "About 70 years",
