@@ -64,7 +64,7 @@ let correctGuesses = 0;
 let incorrectGuesses = 0;
 let questionsIndex = 0;
 let guessTime = 10;
-let timer = null;
+//let timer = null;
 
 // "Start" button click to begin trivia.
 function startTrivia() {
@@ -77,7 +77,9 @@ function startTrivia() {
 // Displays the questions and answers to chose from
 function displayQuestion() {
   $("#question,#answer,#options").empty();
-  $("#question").html(questions[questionsIndex].question);
+  $("#question")
+    .html(questions[questionsIndex].question)
+    .fadeIn();
   for (let i = 0; i < questions[questionsIndex].options.length; i++) {
     let option =
       "<div class='option'>" + questions[questionsIndex].options[i] + "</div>";
@@ -87,23 +89,23 @@ function displayQuestion() {
 }
 // timer for each question
 function startTimer() {
-  clearInterval(timer);
-  timer = setInterval(function() {
-    $("#timer").html(guessTime);
-    if (guessTime === 0) {
-      clearInterval(timer);
-      incorrectGuesses++;
-      guessTime = 10;
-      triviaOver();
-    }
-    guessTime--;
-  }, 1000);
+  // clearInterval(timer);
+  // timer = setInterval(function() {
+  //   $("#timer").html(guessTime);
+  //   if (guessTime === 0) {
+  //     clearInterval(timer);
+  //     incorrectGuesses++;
+  //     guessTime = 10;
+  //     triviaOver();
+  //   }
+  //   guessTime--;
+  // }, 1000);
 
   $(".option").on("click", function() {
     clearInterval(timer);
     guessTime = 10;
     $(".option").unbind();
-    $("#question, #options").empty("slow");
+    $("#question, #options").fadeOut("slow");
     checkGuess(this);
   });
 }
@@ -113,20 +115,26 @@ function checkGuess(guess) {
   let incorrectIcon = "<i class='fas fa-times' id='wrong'></i>";
   if ($(guess).html() == questions[questionsIndex].answer) {
     correctGuesses++;
-    $("#answer").html(
-      correctIcon +
-        " You guessed " +
-        questions[questionsIndex].answer +
-        " correctly."
-    );
+    $("#answer")
+      .fadeIn()
+      .html(
+        correctIcon +
+          " You guessed " +
+          questions[questionsIndex].answer +
+          " correctly."
+      );
   } else {
     incorrectGuesses++;
-    $("#options").html(incorrectIcon + " You guessed: " + $(guess).text());
-    $("#answer").html(
-      correctIcon +
-        " The correct answer is: " +
-        questions[questionsIndex].answer
-    );
+    $("#options")
+      .fadeIn()
+      .html(incorrectIcon + " You guessed: " + $(guess).text());
+    $("#answer")
+      .fadeIn()
+      .html(
+        correctIcon +
+          " The correct answer is: " +
+          questions[questionsIndex].answer
+      );
   }
   setTimeout(function() {
     triviaOver();
