@@ -109,20 +109,23 @@ function startTimer() {
 }
 // Checks if the answer the user clicked is the correct answer
 function checkGuess(guess) {
-  let correct = "<i class='fas fa-check' id='right'></i>";
-  let incorrect = "<i class='fas fa-times' id='wrong'></i>";
+  let correctIcon = "<i class='fas fa-check' id='right'></i>";
+  let incorrectIcon = "<i class='fas fa-times' id='wrong'></i>";
   if ($(guess).html() == questions[questionsIndex].answer) {
     correctGuesses++;
     $("#answer").html(
-      correct +
+      correctIcon +
         " You guessed " +
         questions[questionsIndex].answer +
         " correctly."
     );
   } else {
     incorrectGuesses++;
+    $("#options").html(incorrectIcon + " You guessed: " + $(guess).text());
     $("#answer").html(
-      incorrect + " The correct answer is: " + questions[questionsIndex].answer
+      correctIcon +
+        " The correct answer is: " +
+        questions[questionsIndex].answer
     );
   }
   setTimeout(function() {
@@ -137,9 +140,12 @@ function triviaOver() {
     $("#answer").html(
       "Score: " + Math.round((correctGuesses / questions.length) * 100) + "%"
     );
-    setTimeout(function() {
+    $("#startTrivia")
+      .html("Retake")
+      .css("display", "inline-block");
+    $("#startTrivia").on("click", function() {
       reset();
-    }, 6000);
+    });
   } else {
     questionsIndex++;
     setTimeout(function() {
@@ -154,6 +160,5 @@ function reset() {
   correctGuesses = 0;
   incorrectGuesses = 0;
   $("#question,#options,#answer").empty();
-  $("#startTrivia").css("display", "inline-block");
-  startTrivia();
+  displayQuestion();
 }
