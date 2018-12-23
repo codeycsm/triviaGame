@@ -6,6 +6,11 @@ body {
 body {
   background-image: radial-gradient(red, orange, yellow);
 }
+/* ================ Navbar & Footer styles ============== */
+nav,
+footer {
+  background-color: #333d51;
+}
 .col {
   margin: 1.5em 0px 0px 0px;
 }
